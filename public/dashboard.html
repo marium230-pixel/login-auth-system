@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Vault Auth</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="auth-card dash-card">
+  <div class="dash-header">
+    <div class="vault-mark" style="margin-bottom:0;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="3" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="21" y2="12"/></svg>
+      Vault Auth
+    </div>
+    <button class="logout-btn" id="logout-btn">Log Out</button>
+  </div>
+
+  <h1>Vault unlocked</h1>
+  <p class="subtitle">You're viewing a protected page — this only renders for an authenticated session.</p>
+
+  <div class="vault-door">
+    <svg class="vault-icon" viewBox="0 0 24 24" fill="none" stroke="#e0a555" stroke-width="1.4" style="margin:0 auto 14px;display:block;">
+      <circle cx="12" cy="12" r="9"/>
+      <circle cx="12" cy="12" r="5.2"/>
+      <circle cx="12" cy="12" r="1.4" fill="#e0a555"/>
+      <line x1="12" y1="7" x2="12" y2="3.2"/>
+      <line x1="12" y1="21" x2="12" y2="17"/>
+      <line x1="7" y1="12" x2="3.2" y2="12"/>
+      <line x1="21" y1="12" x2="17" y2="12"/>
+    </svg>
+    <div style="font-size:13px;color:#8ea296;margin-bottom:6px;">Logged in as</div>
+    <div class="session-email" id="session-email">loading…</div>
+  </div>
+
+  <p class="subtitle" style="margin-bottom:0;">Logging out clears your session — you'll need to log back in to return here.</p>
+</div>
+
+<script>
+(function () {
+  const emailEl = document.getElementById('session-email');
+  const logoutBtn = document.getElementById('logout-btn');
+
+  // Verify session on load — if not authenticated, bounce to login
+  fetch('/api/me')
+    .then(res => {
+      if (!res.ok) throw new Error('not authenticated');
+      return res.json();
+    })
+    .then(data => { emailEl.textContent = data.email; })
+    .catch(() => { window.location.href = '/login.html'; });
+
+  logoutBtn.addEventListener('click', async () => {
+    logoutBtn.disabled = true;
+    logoutBtn.textContent = 'Logging out…';
+    try {
+      await fetch('/api/logout', { method: 'POST' });
+    } finally {
+      window.location.href = '/login.html';
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

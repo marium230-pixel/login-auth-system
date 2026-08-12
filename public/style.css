@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #0e1613;
+  --panel: #16211c;
+  --panel-raised: #1e2c25;
+  --input-bg: #182620;
+  --accent: #c68a3d;
+  --accent-bright: #e0a555;
+  --accent-dim: rgba(198, 138, 61, 0.14);
+  --emerald: #2f9e6e;
+  --emerald-dim: rgba(47, 158, 110, 0.14);
+  --text: #eef3ef;
+  --text-dim: #8ea296;
+  --danger: #e0665c;
+  --danger-dim: rgba(224, 102, 92, 0.12);
+  --border: #2b3a32;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(198, 138, 61, 0.07), transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(47, 158, 110, 0.08), transparent 40%);
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  padding: 24px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--emerald), var(--accent));
+}
+
+.vault-mark {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 22px;
+}
+.vault-mark svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+h1 {
+  font-size: 24px;
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+
+.field { margin-bottom: 18px; }
+
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--text-dim);
+  margin-bottom: 7px;
+  text-transform: uppercase;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+}
+
+input[type="email"], input[type="password"], input[type="text"] {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+input:focus { border-color: var(--emerald); }
+input::placeholder { color: #5f7268; }
+
+.field-hint {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 6px;
+}
+
+.error-banner {
+  background: var(--danger-dim);
+  border: 1px solid rgba(224, 102, 92, 0.4);
+  color: var(--danger);
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 13px;
+  margin-bottom: 18px;
+  display: none;
+}
+.error-banner.visible { display: block; }
+
+.success-banner {
+  background: var(--emerald-dim);
+  border: 1px solid rgba(47, 158, 110, 0.4);
+  color: var(--emerald);
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 13px;
+  margin-bottom: 18px;
+  display: none;
+}
+.success-banner.visible { display: block; }
+
+button[type="submit"] {
+  width: 100%;
+  background: var(--emerald);
+  color: #0a1410;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 0;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-top: 4px;
+}
+button[type="submit"]:hover { background: #3bb87e; }
+button[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.switch-link {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.switch-link a {
+  color: var(--accent-bright);
+  text-decoration: none;
+  font-weight: 600;
+}
+.switch-link a:hover { text-decoration: underline; }
+
+/* ---------- Dashboard ---------- */
+.dash-card {
+  max-width: 480px;
+}
+
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.logout-btn {
+  background: var(--panel-raised);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.logout-btn:hover { border-color: var(--danger); color: var(--danger); }
+
+.vault-door {
+  margin: 26px 0;
+  padding: 28px;
+  background: var(--panel-raised);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.vault-icon { width: 52px; height: 52px; margin-bottom: 14px; }
+
+.session-email {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  color: var(--accent-bright);
+  word-break: break-all;
+}
