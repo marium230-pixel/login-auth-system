@@ -2,7 +2,6 @@
 
 A full-stack registration and login flow with hashed passwords, server-side sessions, and a protected dashboard route — themed as a vault: register for a key, log in to unlock it.
 
-Built for the **Oasis Infobyte SIP — Web Development & Designing, Level 2**.
 
 `Node.js` `Express` `SQLite` `bcrypt` `express-session`
 
